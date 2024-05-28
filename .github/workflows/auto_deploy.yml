@@ -1,0 +1,36 @@
+name: Remote ssh command (for master branch)
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: Build newsletter admin enviroiment development
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DEV_SSH_HOST }}
+          username: ${{ secrets.DEV_USERNAME }}
+          key: ${{ secrets.DEV_SSH_KEY }}
+          port: ${{ secrets.DEV_PORT }}
+          script: |
+            whoami
+            cd ~/KienBQ/my-proj-be
+            git checkout .
+            git clean -df
+            git pull
+            git status
+            sudo docker stop first_proj_be
+            sudo docker rm first_proj_be
+            sudo docker rmi first_proj_be
+            sudo docker build --network host -t  first_proj_be .
+            sudo docker run -d --restart unless-stopped --name first_proj_be -p 1337:1337 --add-host=host.docker.internal:172.17.0.1 \
+              -v ./config:/opt/app/config \
+              -v ./src:/opt/app/src \
+              -v ./package.json:/opt/package.json \
+              -v ./yarn.lock:/opt/yarn.lock \
+              -v ./.env:/opt/app/.env \
+              -v ./public/uploads:/opt/app/public/uploads \
+              first_proj_be
