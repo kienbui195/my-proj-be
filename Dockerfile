@@ -14,14 +14,14 @@ ENV JWT_SECRET=EDLlPbgVIjSeJCD8xjkBDg==
 
 WORKDIR /opt/
 COPY package.json yarn.lock ./
-RUN yarn global add node-gyp
-RUN yarn config set network-timeout 600000 -g && yarn install
+RUN npm i -g node-gyp
+RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install
 ENV PATH /opt/node_modules/.bin:$PATH
 
 WORKDIR /opt/app
 COPY . .
 RUN chown -R node:node /opt/app
 USER node
-RUN ["yarn", "build"]
+RUN ["npm", "run", "build"]
 EXPOSE 1337
-CMD ["yarn", "dev"]
+CMD ["npm", "run", "dev"]
