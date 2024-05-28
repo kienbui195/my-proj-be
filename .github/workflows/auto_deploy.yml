@@ -20,7 +20,7 @@ jobs:
             cd ~/KienBQ/my-proj-be
             git checkout .
             git clean -df
-            git pull
+            git pull origin master
             git status
             sudo docker stop first_proj_be
             sudo docker rm first_proj_be
