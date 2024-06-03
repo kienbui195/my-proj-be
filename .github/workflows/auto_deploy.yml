@@ -25,7 +25,7 @@ jobs:
             sudo docker stop first_proj_be
             sudo docker rm first_proj_be
             sudo docker rmi first_proj_be
-            sudo docker build --no-cache --network host -t  first_proj_be .
+            sudo docker build --network host -t  first_proj_be .
             sudo docker run -d --restart unless-stopped --name first_proj_be -p 1337:1337 --add-host=host.docker.internal:172.17.0.1 \
               -v ./config:/opt/app/config \
               -v ./src:/opt/app/src \

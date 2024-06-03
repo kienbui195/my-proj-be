@@ -16,8 +16,8 @@ ENV SCRAPINGANT_APIKEY=f032425a34ef46528d4356981be50eb6
 
 WORKDIR /opt/
 COPY package.json yarn.lock ./
-RUN npm i -g node-gyp
-RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install
+RUN yarn add -g node-gyp
+RUN yarn config set fetch-retry-maxtimeout 600000 -g && yarn
 ENV PATH /opt/node_modules/.bin:$PATH
 
 WORKDIR /opt/app
