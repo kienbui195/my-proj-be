@@ -18,11 +18,11 @@ module.exports = ({ strapi }) => ({
         url: "https://api.zenrows.com/v1/",
         method: "GET",
         params: {
-          'url': urlScrape,
-          'apikey': apiKey || `${process.env.ZENROWS_APIKEY}`,
-          'premium_proxy': addOn ? "true" : "false",
-          'js_render': boostMode ? "true" : "false",
-          'autoparse': outPut === "html" ? "false" : "true",
+          url: urlScrape,
+          apikey: apiKey !== "" ? apiKey : `${process.env.ZENROWS_APIKEY}`,
+          premium_proxy: addOn ? "true" : "false",
+          js_render: boostMode ? "true" : "false",
+          autoparse: outPut === "html" ? "false" : "true",
         },
       });
 
