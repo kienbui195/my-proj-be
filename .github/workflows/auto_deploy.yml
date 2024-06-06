@@ -18,6 +18,8 @@ jobs:
           script: |
             whoami
             cd ~/KienBQ/my-proj-be
+            eval "$(ssh-agent -s)"
+            ssh-add ~/.ssh/github_key
             git checkout .
             git clean -df
             git pull origin master
