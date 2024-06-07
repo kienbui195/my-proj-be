@@ -20,19 +20,17 @@ jobs:
             cd ~/KienBQ/my-proj-be
             eval "$(ssh-agent -s)"
             ssh-add ~/.ssh/github_key
-            git checkout .
-            git clean -df
-            git pull origin master
-            git status
-            sudo docker stop first_proj_be
-            sudo docker rm first_proj_be
-            sudo docker rmi first_proj_be
-            sudo docker build --network host -t  first_proj_be .
-            sudo docker run -d --restart unless-stopped --name first_proj_be -p 1337:1337 --add-host=host.docker.internal:172.17.0.1 \
-              -v ./config:/opt/app/config \
-              -v ./src:/opt/app/src \
-              -v ./package.json:/opt/package.json \
-              -v ./yarn.lock:/opt/yarn.lock \
-              -v ./.env:/opt/app/.env \
-              -v ./public/uploads:/opt/app/public/uploads \
-              first_proj_be
+            git pull
+            npm install
+            rm -rf .env
+            echo "HOST=0.0.0.0" >> .env
+            echo "PORT=1337" >> .env
+            echo "APP_KEYS=bV9RHhbil+5+J4dA5wwEYw==,xGT9ztAvltpk12UQB/o4sA==,zLq7CpnPdGfZh1SE31xvXQ==,Hx3jynV8RnAahuigiVw2pg==" >> .env
+            echo "API_TOKEN_SALT=IaFEDkab1eVdpCuFskMshQ==" >> .env
+            echo "ADMIN_JWT_SECRET=ft4kzK+Wqwo5ifncQfm7rg==" >> .env
+            echo "TRANSFER_TOKEN_SALT=da8Z7MWr1NBZ2oKsuknwSw==" >> .env
+            echo "DATABASE_CLIENT=sqlite" >> .env
+            echo "DATABASE_FILENAME=.tmp/data.db" >> .env
+            echo "JWT_SECRET=EDLlPbgVIjSeJCD8xjkBDg==" >> .env
+            npm run build
+            pm2 restart first_proj_be
