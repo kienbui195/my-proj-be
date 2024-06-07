@@ -21,6 +21,15 @@ jobs:
             eval "$(ssh-agent -s)"
             ssh-add ~/.ssh/github_key
             git pull
+            if ! command -v node &> /dev/null
+            then
+              curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+              sudo apt-get install -y nodejs
+            fi
+            if ! command -v npm &> /dev/null
+            then
+              sudo apt-get install -y npm
+            fi
             npm install
             rm -rf .env
             echo "HOST=0.0.0.0" >> .env
