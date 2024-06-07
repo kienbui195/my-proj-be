@@ -15,9 +15,9 @@ ENV ZENROWS_APIKEY=7fc428fe4359d3b1d63a8601d0014044ad1eb487
 ENV SCRAPINGANT_APIKEY=f032425a34ef46528d4356981be50eb6
 
 WORKDIR /opt/
-COPY package.json yarn.lock ./
-RUN yarn add -g node-gyp
-RUN yarn config set fetch-retry-maxtimeout 600000 -g && yarn
+COPY package.json ./
+RUN npm install -g node-gyp
+RUN npm config set fetch-retry-maxtimeout 600000 -g && npm i
 ENV PATH /opt/node_modules/.bin:$PATH
 
 WORKDIR /opt/app
