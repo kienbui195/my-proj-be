@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dl_answers",
+  "info": {
+    "singularName": "dl-answer",
+    "pluralName": "dl-answers",
+    "displayName": "DL Answer",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "answer": {
+      "type": "text"
+    },
+    "correct_answer": {
+      "type": "boolean",
+      "default": false,
+      "required": true,
+      "private": true
+    },
+    "desc": {
+      "type": "text"
+    }
+  }
+}

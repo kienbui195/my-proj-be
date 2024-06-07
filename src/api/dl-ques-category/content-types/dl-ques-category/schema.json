@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dl_ques_categories",
+  "info": {
+    "singularName": "dl-ques-category",
+    "pluralName": "dl-ques-categories",
+    "displayName": "DL Ques Category"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "dl_questions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::dl-question.dl-question",
+      "mappedBy": "category"
+    }
+  }
+}

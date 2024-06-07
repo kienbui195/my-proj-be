@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dl_questions",
+  "info": {
+    "singularName": "dl-question",
+    "pluralName": "dl-questions",
+    "displayName": "DL Question",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "question": {
+      "type": "text",
+      "required": true
+    },
+    "images": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "answers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::dl-answer.dl-answer"
+    },
+    "paralyzed_point": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::dl-ques-category.dl-ques-category",
+      "inversedBy": "dl_questions"
+    }
+  }
+}
