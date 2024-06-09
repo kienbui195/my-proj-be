@@ -8,6 +8,9 @@ module.exports = () => ({
       register: {
         allowedFields: ["user_role"],
       },
+      jwt: {
+        expiresIn: '7d'
+      }
     },
   },
 });

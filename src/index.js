@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = {
   /**
@@ -18,5 +18,15 @@ C
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
    */
-  bootstrap(/*{ strapi }*/) {},
+  bootstrap({ strapi }) {
+    strapi.db.lifecycles.subscribe({
+      models: ["plugin::users-permissions.user"],
+
+      beforeCreate(event) {
+        const { data } = event.params;
+
+        if (data.user_role === "user") data.acc_status = "Verified";
+      }
+    });
+  },
 };

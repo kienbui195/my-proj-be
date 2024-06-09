@@ -100,6 +100,16 @@
       ],
       "default": "user",
       "required": true
+    },
+    "acc_status": {
+      "type": "enumeration",
+      "enum": [
+        "Verified",
+        "Pending",
+        "Rejected"
+      ],
+      "default": "Pending",
+      "required": true
     }
   }
 }

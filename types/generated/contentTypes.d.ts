@@ -883,6 +883,9 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     user_role: Attribute.Enumeration<['admin', 'user']> &
       Attribute.Required &
       Attribute.DefaultTo<'user'>;
+    acc_status: Attribute.Enumeration<['Verified', 'Pending', 'Rejected']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'Pending'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
