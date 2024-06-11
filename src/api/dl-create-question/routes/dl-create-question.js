@@ -6,7 +6,7 @@ module.exports = {
      handler: 'dl-create-question.exampleAction',
      config: {
        policies: [],
-       middlewares: [],
+       middlewares: ["global::checkUserRoleAdmin"],
      },
     },
   ],
