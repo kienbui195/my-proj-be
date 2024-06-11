@@ -23,6 +23,12 @@
     },
     "desc": {
       "type": "text"
+    },
+    "dl_question": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::dl-question.dl-question",
+      "inversedBy": "answers"
     }
   }
 }

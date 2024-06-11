@@ -380,6 +380,11 @@ export interface ApiDlAnswerDlAnswer extends Schema.CollectionType {
       Attribute.Private &
       Attribute.DefaultTo<false>;
     desc: Attribute.Text;
+    dl_question: Attribute.Relation<
+      'api::dl-answer.dl-answer',
+      'manyToOne',
+      'api::dl-question.dl-question'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
