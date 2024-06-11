@@ -6,4 +6,10 @@
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::dl-question.dl-question');
+module.exports = createCoreRouter('api::dl-question.dl-question', {
+  config: {
+    create: {
+      middlewares: ['global::checkUserRoleAdmin']
+    }
+  }
+});

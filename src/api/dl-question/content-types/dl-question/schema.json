@@ -25,10 +25,12 @@
       ]
     },
     "answers": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::dl-answer.dl-answer",
-      "mappedBy": "dl_question"
+      "displayName": "Answer",
+      "type": "component",
+      "repeatable": true,
+      "component": "dl.answer",
+      "required": true,
+      "min": 1
     },
     "paralyzed_point": {
       "type": "boolean",

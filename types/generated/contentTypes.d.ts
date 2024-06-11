@@ -362,47 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiDlAnswerDlAnswer extends Schema.CollectionType {
-  collectionName: 'dl_answers';
-  info: {
-    singularName: 'dl-answer';
-    pluralName: 'dl-answers';
-    displayName: 'DL Answer';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    answer: Attribute.Text;
-    correct_answer: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.Private &
-      Attribute.DefaultTo<false>;
-    desc: Attribute.Text;
-    dl_question: Attribute.Relation<
-      'api::dl-answer.dl-answer',
-      'manyToOne',
-      'api::dl-question.dl-question'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::dl-answer.dl-answer',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::dl-answer.dl-answer',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiDlQuesCategoryDlQuesCategory extends Schema.CollectionType {
   collectionName: 'dl_ques_categories';
   info: {
@@ -453,11 +412,14 @@ export interface ApiDlQuestionDlQuestion extends Schema.CollectionType {
   attributes: {
     question: Attribute.Text & Attribute.Required;
     images: Attribute.Media;
-    answers: Attribute.Relation<
-      'api::dl-question.dl-question',
-      'oneToMany',
-      'api::dl-answer.dl-answer'
-    >;
+    answers: Attribute.Component<'dl.answer', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
     paralyzed_point: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
@@ -965,7 +927,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::dl-answer.dl-answer': ApiDlAnswerDlAnswer;
       'api::dl-ques-category.dl-ques-category': ApiDlQuesCategoryDlQuesCategory;
       'api::dl-question.dl-question': ApiDlQuestionDlQuestion;
       'plugin::upload.file': PluginUploadFile;
