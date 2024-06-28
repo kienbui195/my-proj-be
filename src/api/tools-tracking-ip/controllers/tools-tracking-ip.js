@@ -41,7 +41,7 @@ module.exports = createCoreController(
               data: {
                 ip_address: `${ip}`,
                 views: 1,
-                history: `${date}`,
+                history: `[${date}]: ${ctx.request.header["user-agent"]}`,
               },
             }
           );
