@@ -446,6 +446,47 @@ export interface ApiDlQuestionDlQuestion extends Schema.CollectionType {
   };
 }
 
+export interface ApiToolsTrackingIpToolsTrackingIp
+  extends Schema.CollectionType {
+  collectionName: 'tools_tracking_ips';
+  info: {
+    singularName: 'tools-tracking-ip';
+    pluralName: 'tools-tracking-ips';
+    displayName: 'Tools Tracking IP';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ip_address: Attribute.String & Attribute.Required;
+    views: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0>;
+    history: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tools-tracking-ip.tools-tracking-ip',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tools-tracking-ip.tools-tracking-ip',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -929,6 +970,7 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::dl-ques-category.dl-ques-category': ApiDlQuesCategoryDlQuesCategory;
       'api::dl-question.dl-question': ApiDlQuestionDlQuestion;
+      'api::tools-tracking-ip.tools-tracking-ip': ApiToolsTrackingIpToolsTrackingIp;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

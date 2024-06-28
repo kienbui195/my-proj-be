@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tools_tracking_ips",
+  "info": {
+    "singularName": "tools-tracking-ip",
+    "pluralName": "tools-tracking-ips",
+    "displayName": "Tools Tracking IP",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "ip_address": {
+      "type": "string",
+      "required": true
+    },
+    "views": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    },
+    "history": {
+      "type": "text"
+    }
+  }
+}
